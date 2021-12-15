@@ -1,7 +1,5 @@
 package stock_check;
 
-import views.MainMenuView;
-
 import java.util.Scanner;
 
 public class CheckStock {
