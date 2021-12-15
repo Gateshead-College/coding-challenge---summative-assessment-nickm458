@@ -7,18 +7,18 @@ public class CurrentStock {
 
     Scanner scn = new Scanner(System.in);
 
-    Stock[] stocks = new Stock[6];
+
 
     void addStock() {
-        stocks[0] = new Stock(111, "Nike", "Air Force One", 95, 50);
-        stocks[1] = new Stock(112, "Nike", "Air Max 90", 80, 200);
-        stocks[2] = new Stock(113, "Nike", "Air Max 95", 160, 25);
-        stocks[3] = new Stock(114, "Nike", "Air Max 97", 185, 15);
-        stocks[4] = new Stock(115, "Adidas", "Ozuwego", 65, 100);
-        stocks[5] = new Stock(115, "Adidas", "Stan Smiths", 50, 150);
+        stocks.add( new Stock(111, "Nike", "Air Force One", 95, 50));
+        stocks.add( new Stock(112, "Nike", "Air Max 90", 80, 200));
+        stocks.add( new Stock(113, "Nike", "Air Max 95", 160, 25));
+        stocks.add( new Stock(114, "Nike", "Air Max 97", 185, 15));
+        stocks.add( new Stock(115, "Adidas", "Ozuwego", 65, 100));
+        stocks.add(new Stock(115, "Adidas", "Stan Smiths", 50, 150));
     }
 
-    private ArrayList<Stock> stock = new ArrayList<Stock>();
+    private ArrayList<Stock> stocks = new ArrayList<Stock>();
     ArrayList<String> guestList = new ArrayList<String>();
 
 
@@ -73,6 +73,39 @@ public class CurrentStock {
     }
 
     private void editProduct() {
+        System.out.println("Please enter the ID of the product you want to edit");
+        int id = Integer.parseInt(new Scanner(System.in).nextLine());
+        Stock editStock = null;
+        for (Stock s : stocks) {
+            if (s.stockID == id) {
+                editStock = s;
+                break;
+            }
+        }
+        System.out.println("Which field would you like to edit?");
+        System.out.println("1 - ID");
+        System.out.println("2 - Manufacturer");
+        System.out.println("3 - Name");
+        System.out.println("4 - Price");
+        System.out.println("5 - Stock");
+        int choice = Integer.parseInt(new Scanner(System.in).nextLine());
+        System.out.println("Please enter the new information:");
+        if (editStock != null) {
+            if (choice == 1) {
+                editStock.stockID = Integer.parseInt(new Scanner(System.in).nextLine());
+            } else if (choice == 2) {
+                editStock.manufacturer = new Scanner(System.in).nextLine();
+            } else if (choice == 3) {
+                editStock.productName = new Scanner(System.in).nextLine();
+            } else if (choice == 4) {
+                editStock.price = Double.parseDouble(new Scanner(System.in).nextLine());
+            } else if (choice == 5) {
+                editStock.stockAmount = Integer.parseInt(new Scanner(System.in).nextLine());
+            } else {
+                System.out.println("Invalid input provided, please try again.");
+                editProduct();
+            }
+        }
     }
 
     private void editStock() {
@@ -132,7 +165,7 @@ public class CurrentStock {
     private void checkStock() {
         System.out.println("What is the name the product you would like to check for?");
         String product = scn.nextLine();
-        if (stocks[0] != null) {
+        if (!stocks.isEmpty()) {
             for (Stock s : stocks) {
                 if (s.productName.equalsIgnoreCase(product)) {
                     System.out.println("We currently stock: " + s.productName);
