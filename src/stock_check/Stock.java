@@ -16,5 +16,7 @@ public class Stock {
         this.stockAmount = stockAmount;
     }
 
+    public Stock(int stockID) {
+    }
 }
 

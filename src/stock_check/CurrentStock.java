@@ -6,8 +6,7 @@ import java.util.Scanner;
 public class CurrentStock {
 
     Scanner scn = new Scanner(System.in);
-
-
+    private boolean exit = false;
 
     void addStock() {
         stocks.add( new Stock(111, "Nike", "Air Force One", 95, 50));
@@ -15,12 +14,11 @@ public class CurrentStock {
         stocks.add( new Stock(113, "Nike", "Air Max 95", 160, 25));
         stocks.add( new Stock(114, "Nike", "Air Max 97", 185, 15));
         stocks.add( new Stock(115, "Adidas", "Ozuwego", 65, 100));
-        stocks.add(new Stock(115, "Adidas", "Stan Smiths", 50, 150));
+        stocks.add( new Stock(115, "Adidas", "Stan Smiths", 50, 150));
     }
 
     private ArrayList<Stock> stocks = new ArrayList<Stock>();
     ArrayList<String> guestList = new ArrayList<String>();
-
 
     public void stockMenu() {
         addStock();
@@ -58,12 +56,14 @@ public class CurrentStock {
             case 7:
                 viewStock();
                 break;
+            case 8:
+                exitApplication();
+                break;
             default:
                 System.out.println("Invalid option provided, please try again.");
                 stockMenu();
         }
     }
-
 
     private void viewStock() {
         for (Stock s : stocks) {
@@ -161,7 +161,6 @@ public class CurrentStock {
         stocks.remove(choice - 1);
     }
 
-
     private void checkStock() {
         System.out.println("What is the name the product you would like to check for?");
         String product = scn.nextLine();
@@ -179,7 +178,15 @@ public class CurrentStock {
         }
     }
 
+    public void getData() {
+        Initialise init = new Initialise();
+        stocks = init.getStocks(init.readFile(Initialise.stocksFile));
+        while(!exit);
+        stockMenu();
+    }
+    private void exitApplication() {
+        Initialise.writeData(stocks);
+        stocks.clear();
+        exit = true;
+    }
 }
-
-
-

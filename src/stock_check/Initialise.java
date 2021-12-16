@@ -81,7 +81,7 @@ public class Initialise {
 
         String[] sd = stockString.split(",");
         s = new Stock(Integer.parseInt(sd[0],
-                sd[1],
+                Integer.parseInt(sd[1]),
                 Integer.parseInt(sd[3]),
                 Integer.parseInt(sd[4])));
         return s;
