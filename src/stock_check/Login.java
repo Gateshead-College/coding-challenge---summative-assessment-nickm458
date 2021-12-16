@@ -30,10 +30,14 @@ public class Login {
             if (username.equals(u.username)) {
                 if (password.equals(u.password)) {
                     CurrentStock cs = new CurrentStock();
-                    cs.getData();
+                    cs.stockMenu();
                     break;
                 }
             }
         }
+
+            CurrentStock cs = new CurrentStock();
+            cs.stockMenu();
     }
+
 }

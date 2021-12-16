@@ -30,6 +30,8 @@ public class CurrentStock {
         System.out.println("5 - Add new item");
         System.out.println("6 - Remove an item");
         System.out.println("7 - View list of stock");
+        System.out.println("8 - Account Settings");
+        System.out.println("9 - Exit Application");
         handleChoice(Integer.parseInt(new Scanner(System.in).nextLine()));
     }
 
@@ -57,6 +59,9 @@ public class CurrentStock {
                 viewStock();
                 break;
             case 8:
+                accountSettings();
+                break;
+            case 9:
                 exitApplication();
                 break;
             default:
@@ -64,6 +69,7 @@ public class CurrentStock {
                 stockMenu();
         }
     }
+
 
     private void viewStock() {
         for (Stock s : stocks) {
@@ -178,7 +184,37 @@ public class CurrentStock {
         }
     }
 
-    public void getData() {
+    private void accountSettings() {
+        System.out.println("Welcome to account settings. Please select an option from below");
+        System.out.println("1 - Change password");
+        accountHandleChoice(Integer.parseInt(new Scanner(System.in).nextLine()));
+    }
+
+    private void accountHandleChoice(int choice) {
+        switch (choice) {
+            case 1:
+                changePassword();
+                break;
+        }
+    }
+
+    ArrayList<User> users;
+
+    private void changePassword() {
+        System.out.println("Please enter your current password:");
+        String password = new Scanner(System.in).nextLine();
+        for (User u : users) {
+            if(password.equals(u.password)) {
+                System.out.println("Please enter your new password:");
+                new Scanner(System.in).nextLine();
+                System.out.println("Please re-enter your new password");
+
+
+            }
+        }
+    }
+
+        public void getData() {
         Initialise init = new Initialise();
         stocks = init.getStocks(init.readFile(Initialise.stocksFile));
         while(!exit);
